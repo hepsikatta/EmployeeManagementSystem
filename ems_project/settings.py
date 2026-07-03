@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wqgx_!su=xpi$jj^coz!0!e4=+hdcrqq0)k$0ne-nxs+g+qb5f'
+SECRET_KEY = 'django-insecure-zj8fqgu+$^9bp69tas1dlw7_v158xp+*p*vmdwprf=w3kbgs@r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'employee',
+    'employees',
 ]
 
 MIDDLEWARE = [
@@ -76,11 +76,7 @@ WSGI_APPLICATION = 'ems_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'ems_db',
-        'USER': 'your_mysql_user',
-        'PASSWORD': 'your_mysql_password',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
