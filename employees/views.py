@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Employee
 from django.db.models import Q
 
-# 1. Login System
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_field_valid() or form.is_valid():
+        if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('dashboard')
@@ -21,7 +20,6 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-# 2. Admin Dashboard & Search Employee
 @login_required
 def dashboard(request):
     query = request.GET.get('search', '')
@@ -35,7 +33,6 @@ def dashboard(request):
         employees = Employee.objects.all()
     return render(request, 'dashboard.html', {'employees': employees, 'query': query})
 
-# 3. Add Employee
 @login_required
 def add_employee(request):
     if request.method == 'POST':
@@ -51,7 +48,6 @@ def add_employee(request):
         return redirect('dashboard')
     return render(request, 'add_employee.html')
 
-# 4. Update Employee
 @login_required
 def update_employee(request, pk):
     emp = get_object_or_404(Employee, pk=pk)
@@ -65,7 +61,6 @@ def update_employee(request, pk):
         return redirect('dashboard')
     return render(request, 'update_employee.html', {'emp': emp})
 
-# 5. Delete Employee
 @login_required
 def delete_employee(request, pk):
     emp = get_object_or_404(Employee, pk=pk)

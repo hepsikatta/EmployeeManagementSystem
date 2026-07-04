@@ -2,67 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMS Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Smooth Entrance Animations */
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(13, 110, 253, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
+        }
+
+        /* Bright Theme Variables & Base Styles */
+        body {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6fffa 100%);
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+        }
+
+        .animate-nav {
+            animation: slideInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-main {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Vibrant Gradient Navbar */
+        .navbar-custom {
+            background: linear-gradient(45deg, #0052d4, #4364f7, #6fb1fc);
+            border-bottom: 3px solid #00ffcc;
+        }
+
+        /* Bright Cards & Tables */
+        .bright-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(67, 100, 247, 0.1);
+            background: #ffffff;
+            border-left: 5px solid #4364f7;
+            transition: all 0.3s ease;
+        }
+
+        .bright-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(67, 100, 247, 0.15);
+        }
+
+        .table-thead-bright {
+            background: linear-gradient(45deg, #4364f7, #6fb1fc);
+            color: white;
+        }
+
+        /* Interactive Table Row Animation */
+        .table tbody tr {
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f4ff !important;
+            transform: scale(1.01) translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Neon & Vibrant Badges */
+        .badge-dept {
+            background: linear-gradient(45deg, #ff007f, #ff7b00);
+            color: white;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(255, 0, 127, 0.2);
+        }
+
+        /* Animated Action Buttons */
+        .btn-bright-add {
+            background: linear-gradient(45deg, #00b4db, #0083b0);
+            color: white;
+            border: none;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .btn {
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Employee Management System</a>
-            <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Logout</a>
+<body>
+    <!-- Animated Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm animate-nav">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold fs-4" href="#">🚀 Enterprise Employee Hub</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm px-4 shadow-sm">Logout</a>
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <!-- Animated Dashboard Container -->
+    <div class="container mt-5 animate-main">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Admin Dashboard</h2>
-            <a href="{% url 'add_employee' %}" class="btn btn-primary">Add New Employee</a>
+            <div>
+                <h2 class="fw-bold text-dark m-0" style="background: linear-gradient(45deg, #0052d4, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Admin Dashboard</h2>
+                <p class="text-secondary fw-semibold m-0">Live organizational workforce roster</p>
+            </div>
+            <a href="{% url 'add_employee' %}" class="btn btn-bright-add px-4 py-2 shadow-sm">+ Add New Employee</a>
         </div>
 
-        <!-- Search Bar -->
-        <form method="GET" class="row g-2 mb-4">
-            <div class="col-md-4">
-                <input type="text" name="search" value="{{ query }}" class="form-control" placeholder="Search by name or department...">
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-secondary w-100">Search</button>
-            </div>
-        </form>
+        <!-- Search Bar Section -->
+        <div class="card bright-card p-3 mb-4">
+            <form method="GET" class="row g-2">
+                <div class="col-md-5">
+                    <input type="text" name="search" value="{{ query }}" class="form-control form-control-lg border-2 border-primary-subtle" placeholder="🔍 Search name, team, or department...">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">Search Records</button>
+                </div>
+            </form>
+        </div>
 
-        <!-- Employee Table -->
-        <div class="card shadow-sm">
-            <table class="table table-hover mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Department</th>
-                        <th>Designation</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for emp in employees %}
-                    <tr>
-                        <td>{{ emp.employee_id }}</td>
-                        <td>{{ emp.first_name }} {{ emp.last_name }}</td>
-                        <td>{{ emp.email }}</td>
-                        <td>{{ emp.department }}</td>
-                        <td>{{ emp.designation }}</td>
-                        <td>
-                            <a href="{% url 'update_employee' emp.pk %}" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="{% url 'delete_employee' emp.pk %}" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center text-muted py-3">No employees found.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <!-- Main Workspace Table -->
+        <div class="card bright-card overflow-hidden">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-thead-bright">
+                        <tr>
+                            <th class="ps-4 py-3">ID Tag</th>
+                            <th class="py-3">Full Name</th>
+                            <th class="py-3">Email Address</th>
+                            <th class="py-3">Department</th>
+                            <th class="py-3">Designation Role</th>
+                            <th class="pe-4 py-3 text-end">Management Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emp in employees %}
+                        <tr class="border-bottom">
+                            <td class="ps-4 fw-bold text-primary">#{{ emp.employee_id }}</td>
+                            <td class="fw-bold text-dark fs-6">{{ emp.first_name }} {{ emp.last_name }}</td>
+                            <td class="text-secondary fw-medium">{{ emp.email }}</td>
+                            <td><span class="badge badge-dept">{{ emp.department }}</span></td>
+                            <td class="text-dark fw-semibold">{{ emp.designation }}</td>
+                            <td class="pe-4 text-end">
+                                <a href="{% url 'update_employee' emp.pk %}" class="btn btn-sm btn-warning me-1 px-3 shadow-sm text-dark">Modify</a>
+                                <a href="{% url 'delete_employee' emp.pk %}" class="btn btn-sm btn-danger px-3 shadow-sm">Remove</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <h4 class="text-muted m-0">No working profiles match your current lookup parameters.</h4>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
