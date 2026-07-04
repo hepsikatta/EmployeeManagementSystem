@@ -1,18 +1,22 @@
 **Enterprise Employee Hub**
     A vibrant, modern, and fully animated **Employee Management System (EMS)** built using Python, Django, and Bootstrap 5. This application allows administrators to easily manage an organization's workforce 
     directory through a highly interactive, responsive web interface.
+
+    
 **Tech Stack**
       Backend Framework: Python & Django 6.x
       Frontend UI:HTML5, CSS3 (Custom keyframes & gradients), Bootstrap 5
       Database: SQLite3
-** Project Flow: How It Works**
+
+      
+**Project Work Flow**
   Understanding how data flows through the application is straightforward:
   [ Admin Login ] ──> [ Dashboard View ] ──> [ Search Bar Filters List ]
                              │
                              ├──> [ + Add New Employee Form ] ──> Saves to Database
                              ├──> [ Modify Details Form ]     ──> Updates Database
                              └──> [ Delete Confirmation ]     ──> Removes from Database
- Getting Started Locally
+ 
 
 Follow these quick configuration steps to get the project running on your computer:
 
